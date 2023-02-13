@@ -1,0 +1,29 @@
+n = int(input("Enter the number of Jobs\n"))
+
+jobs = []
+for i in range(n):
+    start_time = input("Enter job start time in HHMM format\n")
+    end_time = input("Enter job end time in HHMM format\n")
+    profit = int(input("Enter job profit\n"))
+    jobs.append((start_time, end_time, profit))
+
+
+jobs.sort(key=lambda job: job[1])  # Sort jobs by end time
+
+
+lokesh_jobs = []   # Select jobs for Lokesh
+lokesh_profit = 0
+end_time = '0000'
+for job in jobs:
+    if job[0] >= end_time:
+        lokesh_jobs.append(job)
+        lokesh_profit += job[2]
+        end_time = job[1]
+
+
+other_jobs = n - len(lokesh_jobs) # Calculate remaining jobs and profit
+other_profit = sum(job[2] for job in jobs if job not in lokesh_jobs)
+
+print("The number of tasks and earnings available for others")   # Print the result
+print("Task:", other_jobs)
+print("Earnings:", other_profit)
